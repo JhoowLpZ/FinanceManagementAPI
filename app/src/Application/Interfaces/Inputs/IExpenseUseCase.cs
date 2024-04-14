@@ -2,7 +2,7 @@
 
 namespace Application.Interfaces.Inputs
 {
-    internal interface IExpenseUseCase
+    public interface IExpenseUseCase
     {
         Task<IEnumerable<Expense>> GetExpenseListAsync();
         Task<Expense> GetExpenseByIdAsync(int Id);

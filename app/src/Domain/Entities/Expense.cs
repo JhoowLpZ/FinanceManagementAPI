@@ -1,7 +1,6 @@
 ﻿namespace Domain.Entities;
 public class Expense : BaseEntity<int>
 {
-    public int Id { get; set; }
     public string Description { get; set; } = String.Empty;
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }

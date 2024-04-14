@@ -2,7 +2,7 @@
 
 namespace Application.Interfaces.Inputs
 {
-    internal interface IIncomeUseCase
+    public interface IIncomeUseCase
     {
         Task<IEnumerable<Income>> GetIncomeListAsync();
         Task<Income> GetIncomeByIdAsync(int Id);
