@@ -1,5 +1,4 @@
-﻿
-using Application.Interfaces.Inputs;
+﻿using Application.Interfaces.Inputs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 
@@ -7,16 +6,10 @@ namespace Presentation.Endpoints
 {
     public class ExpenseEndpoint : IEndpoint
     {
-        private readonly IExpenseUseCase _useCase;
-        public ExpenseEndpoint(IExpenseUseCase useCase)
-        {
-            _useCase = useCase;
-        }
-
         public void MapEndpoints(IEndpointRouteBuilder endpoints)
         {
-            endpoints.MapGet("/expenses", () => {
-                _useCase.GetExpenseListAsync().Wait();
+            endpoints.MapGet("/expenses", (IExpenseUseCase _useCase) => {
+                return _useCase.GetExpenseListAsync();
             });
         }
     }

@@ -3,7 +3,7 @@ using Application.Extensions;
 using Infrastructure.Extensions;
 using Presentation.Extensions;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.RegisterDbContext();
 builder.Services.RegisterRepositories();
@@ -13,7 +13,7 @@ builder.Services.RegisterUseCases();
 builder.Services.RegisterEndpoints();
 builder.Services.RegisterOpenAPI();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 app.RegisterMiddlewares();
 

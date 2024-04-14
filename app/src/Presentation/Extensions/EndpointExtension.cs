@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Presentation.Endpoints;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Presentation.Endpoints;
-using System.Reflection;
 
 namespace Presentation.Extensions
 {
@@ -10,18 +9,15 @@ namespace Presentation.Extensions
     {
         public static void MapEndpoints(this WebApplication app)
         {
-            using (var serviceScope = app.Services.CreateScope())
-            {
-                var endpoints = serviceScope.ServiceProvider.GetServices<IEndpoint>();
+            var endpoints = app.Services.GetRequiredService<IEnumerable<IEndpoint>>();
 
-                foreach (var endpoint in endpoints)
-                {
-                    endpoint.MapEndpoints(app);
-                }
+            foreach (var endpoint in endpoints)
+            {
+                endpoint.MapEndpoints(app);
             }
         }
 
-        public static void RegisterEndpoints(this IServiceCollection services)
+        public static IServiceCollection RegisterEndpoints(this IServiceCollection services)
         {
             ServiceDescriptor[] serviceDescriptors = typeof(IEndpoint).Assembly
                 .GetTypes()
@@ -30,6 +26,8 @@ namespace Presentation.Extensions
                 .ToArray();
 
             services.TryAddEnumerable(serviceDescriptors);
+
+            return services;
         }
     }
 }

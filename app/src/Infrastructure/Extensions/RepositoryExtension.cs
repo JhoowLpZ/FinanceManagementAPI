@@ -9,8 +9,8 @@ namespace Infrastructure.Extensions
     {
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
-            services.AddScoped<IRepository<Income>, IncomeRepository>();
-            services.AddScoped<IRepository<Expense>, ExpenseRepository>();
+            services.AddTransient<IRepository<Income>, IncomeRepository>();
+            services.AddTransient<IRepository<Expense>, ExpenseRepository>();
 
             return services;
         }

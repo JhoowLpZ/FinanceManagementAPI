@@ -8,8 +8,8 @@ namespace Application.Extensions
     {
         public static IServiceCollection RegisterUseCases(this IServiceCollection services)
         {
-            services.AddScoped<IIncomeUseCase, IncomeUseCase>();
-            services.AddScoped<IExpenseUseCase, ExpenseUseCase>();
+            services.AddTransient<IIncomeUseCase, IncomeUseCase>();
+            services.AddTransient<IExpenseUseCase, ExpenseUseCase>();
 
             return services;
         }
