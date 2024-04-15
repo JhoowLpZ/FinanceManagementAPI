@@ -38,11 +38,24 @@ namespace Application.UseCases
             }
         }
 
-        public async Task<Expense> InsertAsync(Expense Expense)
+        public async Task<Expense> InsertAsync(Expense expense)
         {
             try
             {
-                return await _repository.SaveAsync(Expense);
+                return await _repository.SaveAsync(expense);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
+
+        public async Task<Expense> UpdateAsync(Expense expense, int id)
+        {
+            try
+            {
+                return await _repository.UpdateAsync(expense, id);
             }
             catch (Exception ex)
             {

@@ -5,8 +5,9 @@ namespace Application.Interfaces.Inputs
     public interface IExpenseUseCase
     {
         Task<IEnumerable<Expense>> GetExpenseListAsync();
-        Task<Expense> GetExpenseByIdAsync(int Id);
+        Task<Expense> GetExpenseByIdAsync(int id);
         Task<Expense> InsertAsync(Expense expense);
-        Task<bool> DeleteAsync(int Id);
+        Task<Expense> UpdateAsync(Expense expense, int id);
+        Task<bool> DeleteAsync(int id);
     }
 }

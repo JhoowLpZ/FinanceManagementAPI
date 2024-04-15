@@ -51,6 +51,19 @@ namespace Application.UseCases
             }
         }
 
+        public async Task<Income> UpdateAsync(Income income, int id)
+        {
+            try
+            {
+                return await _repository.UpdateAsync(income, id);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
+
         public async Task<bool> DeleteAsync(int id)
         {
             try

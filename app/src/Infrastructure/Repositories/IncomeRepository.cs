@@ -29,11 +29,12 @@ namespace Infrastructure.Repositories
             return entity;
         }
 
-        public Task UpdateAsync(Income entity)
+        public async Task<Income> UpdateAsync(Income entity, object id)
         {
-            Income exist = _context.Set<Income>().Find(entity.Id);
+            Income exist = await _context.Set<Income>().FindAsync(id);
             _context.Entry(exist).CurrentValues.SetValues(entity);
-            return Task.CompletedTask;
+
+            return entity;
         }
 
         public async Task<bool> DeleteAsync(object id)
