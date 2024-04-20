@@ -26,6 +26,8 @@ namespace Infrastructure.Repositories
         public async Task<Expense> SaveAsync(Expense entity)
         {
             await _context.Set<Expense>().AddAsync(entity);
+            await _context.SaveChangesAsync();
+            
             return entity;
         }
 
@@ -33,6 +35,7 @@ namespace Infrastructure.Repositories
         {
             Expense exist = await _context.Set<Expense>().FindAsync(id);
             _context.Entry(exist).CurrentValues.SetValues(entity);
+            await _context.SaveChangesAsync();
 
             return entity;
         }
@@ -44,6 +47,8 @@ namespace Infrastructure.Repositories
                 return false;
 
             _context.Set<Expense>().Remove(entity);
+            await _context.SaveChangesAsync();
+
             return true;
         }
     }

@@ -26,14 +26,16 @@ namespace Infrastructure.Repositories
         public async Task<Income> SaveAsync(Income entity)
         {
             await _context.Set<Income>().AddAsync(entity);
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task<Income> UpdateAsync(Income entity, object id)
         {
             Income exist = await _context.Set<Income>().FindAsync(id);
-            _context.Entry(exist).CurrentValues.SetValues(entity);
+             _context.Entry(exist).CurrentValues.SetValues(entity);
 
+            await _context.SaveChangesAsync();
             return entity;
         }
 
@@ -44,6 +46,8 @@ namespace Infrastructure.Repositories
                 return false;
 
             _context.Set<Income>().Remove(entity);
+            await _context.SaveChangesAsync();
+
             return true;
         }
     }
