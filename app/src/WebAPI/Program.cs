@@ -5,7 +5,7 @@ using Presentation.Extensions;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-builder.Services.RegisterDbContext();
+builder.Services.RegisterDbContext(builder.Configuration);
 builder.Services.RegisterRepositories();
 
 builder.Services.RegisterUseCases();
