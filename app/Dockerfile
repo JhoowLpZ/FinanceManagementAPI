@@ -1,19 +1,16 @@
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-nanoserver-1809 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
-EXPOSE 5200
+EXPOSE 80
 
-ENV ASPNETCORE_URLS=http://+:5200
-
-FROM mcr.microsoft.com/dotnet/sdk:6.0-nanoserver-1809 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 ARG configuration=Release
 WORKDIR /src
 COPY ["FinanceManagementAPI.sln", "./"]
-COPY ["src/WebAPI/WebAPI.csproj", "WebAPI/"]
-COPY ["src/Presentation/Presentation.csproj", "Presentation/"]
-COPY ["src/Infrastructure/Infrastructure.csproj", "Infrastructure/"]
-COPY ["src/Application/Application.csproj", "Application/"]
-COPY ["src/Domain/Domain.csproj", "Domain/"]
-
+COPY ["src/WebAPI/WebAPI.csproj", "src/WebAPI/"]
+COPY ["src/Presentation/Presentation.csproj", "src/Presentation/"]
+COPY ["src/Infrastructure/Infrastructure.csproj", "src/Infrastructure/"]
+COPY ["src/Application/Application.csproj", "src/Application/"]
+COPY ["src/Domain/Domain.csproj", "src/Domain/"]
 RUN dotnet restore
 COPY . .
 RUN dotnet build -c $configuration -o /app/build
